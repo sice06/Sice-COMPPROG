@@ -14,7 +14,7 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
+        double[][] orderDetails = new double[CoffeeMenu.length][3];
         int[] orderCount = new int[CoffeeMenu.length];
         String receipt = "\n---- Coffee Order Receipt ----\n";
         double total = 0.0;
@@ -22,6 +22,7 @@ public class Main {
         while (true) {
             displayMenu();
 
+            System.out.println("---------------------------");
             System.out.print("Choose your coffee (1-" + CoffeeMenu.length + ", or 0 to finish): ");
             int choice;
             try {
@@ -42,10 +43,15 @@ public class Main {
                 }
 
                 orderCount[choice - 1] += quantity;
+                int index = choice - 1;
+                orderDetails[index][0] += quantity; // Store quantity
+                orderDetails[index][1] = CoffeePrices[index]; // Store price per coffee
+                orderDetails[index][2] = orderDetails[index][0] * CoffeePrices[index]; // Store total cost
 
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input. Please enter a number.");
             }
+
         }
 
         //Summarize the order
@@ -63,6 +69,9 @@ public class Main {
 
 
         System.out.println("---------------------------\n");
+        printReceipt(orderDetails);
+        System.out.println("SubTotal: " + total);
+        System.out.println("VAT: " + vat);
         System.out.println("Total: " + grandTotal);
         System.out.println("---------------------------\n");
         System.out.print("Enter Payment Amount: ");
@@ -104,6 +113,18 @@ public class Main {
         System.out.println("0. Finish Order");
     }
 
+    public static void printReceipt(double[][] orderDetails) {
+        System.out.println("-------- Order List --------");
+        System.out.printf("%-12s %-10s %-10s %-10s\n", "Item", "Quantity", "Price", "Total");
+
+        for (int i = 0; i < orderDetails.length; i++) {
+            if (orderDetails[i][0] > 0) {
+                System.out.printf("%-12s %-10.0f %-10.2f %-10.2f\n",
+                        CoffeeMenu[i], orderDetails[i][0], orderDetails[i][1], orderDetails[i][2]);
+            }
+        }
+        System.out.println("---------------------------");
+    }
     /**
      * Method to save the receipt to a file
      * @param receipt The receipt to save
