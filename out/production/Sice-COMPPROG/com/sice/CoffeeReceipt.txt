@@ -1,8 +1,0 @@
-~~~~~~~~ Receipt ~~~~~~~~
-Item         Qty        Price      Total     
-Mocha        5          80.00      400.00    
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-Total before VAT: 400.00 PHP
-VAT (12%): 48.00 PHP
-Total amount due: 448.00 PHP
-------------------------------
