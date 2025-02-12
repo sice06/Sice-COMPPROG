@@ -113,6 +113,10 @@ public class Main {
         System.out.println("0. Finish Order");
     }
 
+    /*
+    2D Array to display order details for the user after completing the order
+     */
+
     public static void printReceipt(double[][] orderDetails) {
         System.out.println("-------- Order List --------");
         System.out.printf("%-12s %-10s %-10s %-10s\n", "Item", "Quantity", "Price", "Total");
